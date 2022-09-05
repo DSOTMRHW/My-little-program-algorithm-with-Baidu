@@ -1,0 +1,25 @@
+#include<bits/stdc++.h> 
+using namespace std;
+
+int main() {
+	int x;
+	int mod[3];
+	cin >> x;
+	int ways[1000]={1,0};
+	for (int i = 0;i < 3;i++) {
+		cin >> mod[i];
+	}
+	for (int i = 1;i <= x;i++) {        //way[0] = 1
+		for (int j = 0;j < 3;j++) {
+			if (i - mod[j] >= 0) {
+				ways[i] += ways[i - mod[j]];
+				ways[i] = ways[i] % 1000000007; 
+			}
+		}
+	}
+	if (ways[x])
+		cout << ways[x] << endl;
+	else
+		puts("impossible");
+	return 0;
+}

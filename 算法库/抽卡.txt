@@ -1,0 +1,14 @@
+#include<stdio.h>
+int main() 
+{ 
+	double n;
+	scanf("%lf",&n);
+	double hit = 0, nhit = 1 - hit;
+	for (int i = 0;i < n;i++) {
+		hit += nhit * 0.006;
+		nhit = 1 - hit;
+	}
+	printf("%.6lf",hit*100);
+	printf("%%");
+	return 0;
+}

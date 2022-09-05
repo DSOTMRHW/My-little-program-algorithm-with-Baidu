@@ -1,0 +1,37 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+using namespace std;
+
+int main()
+{
+	int times,n;
+	cin>>times;
+	while(times--)
+	{
+		cin>>n;
+		if(n%4==0) 
+			cout<<n/4<<endl;  //ALL 4
+		else if(n%4==2)   //4+6
+		{
+			if(n/4>=1) 
+				cout<<n/4<<endl;
+			else 
+				cout<<-1<<endl;
+		}
+		else if(n%4==1)   //4+9
+		{
+			if(n/4>=2) 
+				cout<<n/4-1<<endl;
+			else 
+				cout<<-1<<endl;
+		}
+		else   //4+6+9
+		{
+			if(n/4>=3) 
+				cout<<n/4-1<<endl;
+			else 
+				cout<<-1<<endl;
+		}
+	}
+}

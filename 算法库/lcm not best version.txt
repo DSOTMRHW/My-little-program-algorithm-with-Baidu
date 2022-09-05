@@ -1,0 +1,14 @@
+#include<stdio.h>
+int main()
+{
+	long a = 0;
+	long b = 0;
+	scanf("%ld %ld",&a,&b);
+	int i = 1;
+	while ((a * i) % b != 0)
+	{
+		i++;
+	}
+	printf("%ld", i * a);
+	return 0;
+}
