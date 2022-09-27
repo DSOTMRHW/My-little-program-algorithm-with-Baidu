@@ -1,0 +1,112 @@
+#include<stdio.h>
+#include<string.h>
+int main() 
+{ 
+	int n = 0;
+	scanf("%d",&n);
+	int ss[n][3];
+	char sn[n][50];
+	int rank[n];
+	for(int i=0;i<n;i++){
+		rank [i] = i;
+		//		printf("%d",rank[i]);
+	}
+	
+	for(int i=0;i<n;i++){
+		scanf(" %s",sn[i]);
+		for(int j=0;j<3;j++){
+			scanf("%d",&ss[i][j]);
+		}
+	}
+	//	for(int i=0;i<n;i++){
+	//		printf("%s\n",sn[i]);
+	//		for(int j=0;j<3;j++){
+	//			printf("%d\n",ss[i][j]);
+	//		}
+	//	}
+	//	for(int k=0;k<n;k++){
+	for(int k=0;k<n;k++){
+	for(int i=0;i<n-1;i++){
+		//			printf("\n");
+		//			printf("1-%d\n",i);
+		int j = 0;
+		if(ss[i][j]<ss[i+1][j]){
+			rank[i] = rank[i]^rank[i+1];
+			rank[i+1] = rank[i]^rank[i+1];
+			rank[i] = rank[i]^rank[i+1];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 1;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 2;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 0;
+			//				printf("***\n");
+		}
+		
+	}
+	for(int i=0;i<n-1;i++){
+		//			printf("\n");
+		//			printf("2-%d\n",i);
+		int j = 1;
+		if(ss[i][j-1] == ss[i+1][j-1] && ss[i][j]<ss[i+1][j]){
+			rank[i] = rank[i]^rank[i+1];
+			rank[i+1] = rank[i]^rank[i+1];
+			rank[i] = rank[i]^rank[i+1];
+			j = 0;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 1;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 2;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 0;
+			//				printf("!!!\n");
+		}
+		//			for(int e=0;e<n;e++){
+		//				printf("%s ",sn[rank[e]]);
+		//			}
+	}
+	for(int i=0;i<n-1;i++){
+		//			printf("\n");
+		//			printf("3-%d\n",i);
+		int j = 2;
+		if(ss[i][j-2] == ss[i+1][j-2] && ss[i][j-1] == ss[i+1][j-1] && ss[i][j]<ss[i+1][j]){
+			rank[i] = rank[i]^rank[i+1];
+			rank[i+1] = rank[i]^rank[i+1];
+			rank[i] = rank[i]^rank[i+1];
+			j = 0;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 1;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 2;
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			ss[i+1][j] = ss[i][j]^ss[i+1][j];
+			ss[i][j] = ss[i][j]^ss[i+1][j];
+			j = 0;
+			//				printf("+++\n");
+		}
+		//			for(int e=0;e<n;e++){
+		//				printf("%s ",sn[rank[e]]);
+		//			}
+	}
+	}
+	for(int i=0;i<n;i++){
+		printf("%s\n",sn[rank[i]]);
+	}
+	return 0; 
+}

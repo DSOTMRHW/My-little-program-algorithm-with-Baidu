@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+	const int N = 200000;
+	int n, a[N], dp[N], res = -9999999;
+	scanf("%d",&n);
+	for (int i = 0 ; i < n ; i ++ ) 
+		scanf("%d",&a[i]);
+	for (int i = 0 ; i < n ; i ++ ){
+		dp[i] = fmax(dp[i - 1] + a[i], a[i]);
+		res = fmax(res, dp[i]);
+	}
+	printf("%d",res);
+	return 0;
+}
