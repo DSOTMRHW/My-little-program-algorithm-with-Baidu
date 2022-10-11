@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+class ThreeJinZhi{
+private:
+	char num[100];
+public:
+
+	ThreeJinZhi(){
+		memset(num,0,sizeof(num)); 
+	}
+
+	ThreeJinZhi(int x){
+		bool sgn;//正数为0，负数为1
+		if (x<0){
+			sgn = 1;
+			x = -x;
+		}else sgn = 0;
+		for (int i=0; i<=97; i++){
+			int rem = x%3;
+			if (rem == 2)	num[i] = -1;
+			else	num[i] = rem;
+			x -= num[i];
+			x /= 3;
+		}
+		if (sgn) for (int i=0;i<=97;i++) num[i] = -num[i];
+	}
+
+	void print(){
+		bool flag = false;//标志第一个数是不是0
+		for (int i=97;i>0;i--){
+			if (num[i]){
+				flag = true;
+				putchar(num[i]==-1?'-':num[i]+'0');
+			}else if (flag)	putchar(num[i]==-1?'-':num[i]+'0');
+		}
+		putchar(num[0]==-1?'-':num[0]+'0');
+	}
+
+};
+int n;
+int main(){
+	scanf("%d",&n);
+	while (n--){
+		int x;
+		scanf("%d",&x);
+		ThreeJinZhi(x).print();
+		putchar('\n');
+	}
+	return 0;
+}

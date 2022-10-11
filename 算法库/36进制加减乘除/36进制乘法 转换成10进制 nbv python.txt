@@ -1,0 +1,49 @@
+def convert(str1):#36进制 to 10进制
+    sum1=0
+    l=len(str1)
+    if str1[0] != '-':
+        for i in range(0,l):
+            # print(str1[i])
+            # print(str_list.index(str1[i]))
+            # print(pow(36,l-i-1))
+            sum1 += str_list.index(str1[i])*(pow(36,l-i-1))
+    else:
+        for i in range(1,l):
+                sum1 += str_list.index(str1[i])*(pow(36,l-i-1))
+        sum1=-sum1
+    return sum1
+def convert2(num):
+    res=''
+    if num == 0:
+        return '0'
+    base36 = []
+    flag=0#标志是否为负数
+    while num != 0:
+        if num>0:
+            num, i = divmod(num, 36)    # number// 36 , number%36
+            base36.append(str_list[i])
+        else:
+            flag=1
+            num, i = divmod(-num, 36)
+            base36.append(str_list[i])
+    if flag==0:
+        res = ''.join(reversed(base36))
+    else:
+        res = '-'+''.join(reversed(base36))
+    return res
+def main():
+    
+    n = int(input())
+    for i in range(n):
+        s = input().split( )
+        a,b = convert(s[0]),convert(s[1])
+        res=a*b
+        res = convert2(res)
+        print(res)
+    pass
+
+
+if __name__ == '__main__':
+    str_list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+                'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    main();

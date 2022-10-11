@@ -1,0 +1,110 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+char getChar(int n)
+{
+	if (n <= 9)
+		return n + '0';
+	else
+		return n - 10 + 'A';
+}
+
+int getInt(char ch)
+{
+	if ('0' <= ch && ch <= '9')
+		return ch - '0';
+	else
+		return ch - 'A' + 10;
+}
+
+string sub(string a, string b) {
+	string res = "";
+	int borrow = 0;
+	int i = a.size() - 1, j = b.size() - 1;
+	while (i >= 0 || j >= 0) {
+		int x = i >= 0 ? getInt(a[i]) : 0;
+		int y = j >= 0 ? getInt(b[j]) : 0;
+		int z = (x - borrow - y + 36) % 36;
+		res += getChar(z);
+		borrow = x - borrow - y < 0 ? 1 : 0;
+		i--, j--;
+	}
+	reverse(res.begin(), res.end());
+	int pos;
+	for (pos = 0; pos < res.size()-1; pos++) {
+		if (res[pos] != '0') break;
+	}
+	return res.substr(pos);
+}
+
+bool isLess(string a, string b) {
+	if (a.size() == b.size()) return a < b;
+	return a.size() < b.size();
+}
+
+string subStrings(string num1, string num2) {
+	string res;
+	if (isLess(num1, num2)) {
+		res = sub(num2, num1);
+		res.replace(0, 0, "-");
+	}
+	else res = sub(num1, num2);
+	return res;
+}
+
+string add36Strings(string num1, string num2)
+{
+	int carry = 0;
+	int i = num1.size() - 1,j = num2.size() - 1;
+	int x, y;
+	string res;
+	while (i >= 0 || j >= 0 || carry)
+	{
+		x = i >= 0 ? getInt(num1[i]) : 0;
+		y = j >= 0 ? getInt(num2[j]) : 0;
+		int temp = x + y + carry;
+		res += getChar(temp % 36);
+		carry = temp / 36;
+		i--, j--;
+	}
+	reverse(res.begin(), res.end());
+	return res;
+}
+
+
+int main()
+{
+	string a , b;
+	int n = 0;
+	cin>>n;
+	cin>>a;
+	for(int i=0;i<n-1;i++){
+		cin>>b;
+		if(b[0] == '-' || a[0] == '-'){
+			if(b[0] == '-' && a[0] != '-'){
+				b = b.substr(1,b.length());
+				a = subStrings(a, b);
+			}
+			else if(b[0] != '-' && a[0] == '-'){
+				a = a.substr(1,a.length());
+				a = subStrings(b, a);
+			}
+			else{
+				b = b.substr(1,b.length());
+				a = a.substr(1,a.length());
+				a = add36Strings(a, b);
+				a.replace(0,0, "-");
+			}
+		}
+		else{
+			a = add36Strings(a, b);
+		}
+//		cout<<a<<endl<<endl;
+	}
+	cout << a << endl;
+	return 0;
+}
+
+
+ 

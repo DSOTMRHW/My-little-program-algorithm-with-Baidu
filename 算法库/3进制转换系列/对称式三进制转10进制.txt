@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+void k_to_ten(char n[],int k){//k进制转十进制
+	int num=0;
+	int nump=0;
+	int l=strlen(n);
+	//	printf("%lld",l);
+	//	printf("**%d",l);
+	for(int i=0;i<l;i++){
+		//		printf("********\n");
+		if(n[i] == '-')
+			nump = -1*pow(3,l-1-i);
+		if(n[i] == '0')
+			nump = 0*pow(3,l-1-i);
+		if(n[i] == '1')
+			nump = 1*pow(3,l-1-i);
+		//		printf("********\n");
+		num += nump;
+	}
+	printf("%d\n",num);
+}
+
+int main(){
+	char n[1000];
+	int k,k1 = 1000000;
+	k = 3;
+	scanf("%d",&k1);
+	for(int i=0;i<k1;i++){
+		scanf("%s",&n);
+		k_to_ten(n,k);
+	}
+	return 0;
+}
